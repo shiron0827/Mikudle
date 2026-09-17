@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import '../styles/IntroPopup.css';
 import { GiDrumKit, GiGuitarBassHead } from "react-icons/gi";
 import { FaArrowRightLong, FaImage } from "react-icons/fa6";
@@ -10,14 +9,12 @@ interface Props {
 }
 
 function IntroPopup( {buttonClick} : Props ) {
-    const [display, setDisplay] = useState(true);
 
     function handleClick() {
         buttonClick()
     }
     
     return ( 
-        display && (
             <div className="intro-popup-background">
                 <section className="intro-popup-base">
                     <div className="mikudle-title-b">Mikudle</div>
@@ -78,7 +75,6 @@ function IntroPopup( {buttonClick} : Props ) {
                 </section>
             </div>
         )
-    );
 }
 
 export default IntroPopup;

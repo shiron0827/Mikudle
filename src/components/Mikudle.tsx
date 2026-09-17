@@ -31,7 +31,7 @@ function Mikudle() {
     const [progress, setProgress] = useState(0);
     const [loaded, setLoaded] = useState(false);
     const [song, setSong] = useState<Song | null>(null);
-    const [loading, setLoading] = useState(true);
+    //const [loading, setLoading] = useState(true);
     const [won, setWon] = useState(false);
 
     const [introOpen, setIntroOpen] = useState(true);
