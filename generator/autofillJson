@@ -1,0 +1,30 @@
+import requests
+from datetime import datetime
+
+def sweepYear(year: int, english: bool):
+    if(english): lang = "English"
+    else: lang = "Default"
+
+    params = {
+        "artistTypes": "Producer",
+        "maxResults": 10000,
+        "getTotalCount": True,
+        "sort": "SongRating",
+        "lang": lang
+    }
+
+    response = requests.get("https://vocadb.net/api/artists", params=params)
+
+    print(response.status_code)
+
+    if response.status_code == 200:
+        data = response.json()
+        items = data["items"]
+
+        if not items: return {}
+
+        for producer in items:
+
+            result = {items["id"], items["name"]}
+            
+        return {}
