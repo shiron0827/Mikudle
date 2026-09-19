@@ -43,7 +43,7 @@ function Mikudle() {
 
     async function LoadData() {
         const response = await fetch(
-            `${import.meta.env.BASE_URL}/songs/today/songData.json`
+            `${import.meta.env.BASE_URL}songs/today/songData.json`
         );
 
         if (!response.ok) {
