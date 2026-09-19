@@ -9,7 +9,7 @@ from audio_separator.separator import Separator
 def splitSong(path: str) -> list[str]:
     # Initialize the Separator class with custom parameters
     separator = Separator(
-        output_dir='songs',
+        output_dir='../public/songs/tomorrow',
         ensemble_algorithm='avg_wave',
     )
 

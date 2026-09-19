@@ -39,7 +39,7 @@ def setup():
         thumbUrl = thumbUrl,
     )
 
-    bridge.addSongDataToDb(result)
+    bridge.addSongDataToJson(result)
 
     return songDict["id"]
 

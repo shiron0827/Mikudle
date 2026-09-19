@@ -14,7 +14,7 @@ def downloadMp3(url: str) -> str:
 
     opts = {
         "format": "bestaudio/best",
-        "outtmpl": "songs/fullsong.%(ext)s",
+        "outtmpl": "../public/songs/tomorrow/fullsong.%(ext)s",
         "postprocessors": [{
             "key": "FFmpegExtractAudio",
             "preferredcodec": "mp3",

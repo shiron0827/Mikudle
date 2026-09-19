@@ -1,5 +1,5 @@
 .page-background {
-  background-image: url('src/assets/ME10th_th.jpg'); 
+  background-image: url('../assets/ME10th_th.jpg'); 
   background-repeat: no-repeat; 
   background-position: center; 
   background-size: cover; 
