@@ -5,3 +5,4 @@ audio-separator
 requests
 yt-dlp
 onnxruntime
+audioread
