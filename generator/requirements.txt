@@ -4,3 +4,4 @@ torch
 audio-separator
 requests
 yt-dlp
+onnxruntime
