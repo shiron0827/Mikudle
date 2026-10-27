@@ -1,39 +1,37 @@
-import os
-import mysql.connector
-from dotenv import load_dotenv
-from typing import cast
 
-load_dotenv()
-mydb = mysql.connector.connect(
-    host=os.environ["DB_HOST"],
-    user=os.environ["DB_USER"],
-    password=os.environ["DB_PASSWORD"],
-    database=os.environ["DB_NAME"]
-)
-cursor = mydb.cursor()
+import json
+from pathlib import Path
+
+DB_FILE = Path(__file__).resolve().parent / "usedSongs.json"
 
 
-def checkForOverlap(id: int):
-    cursor.execute("SELECT 1 FROM usedSongs WHERE id = %s", (id,))
-    records = cursor.fetchone()
-    if records is not None:
+def loadSongs() -> list[int]:
+    if not DB_FILE.exists():
+        return []
+
+    with DB_FILE.open("r", encoding="utf-8") as file:
+        return json.load(file)
+
+
+def saveSongs(songs: list[int]) -> None:
+    with DB_FILE.open("w", encoding="utf-8") as file:
+        json.dump(songs, file, indent=2)
+
+
+def checkForOverlap(id: int) -> bool:
+    songs = loadSongs()
+    return id not in songs
+
+
+def addSongToDb(id: int) -> bool:
+    songs = loadSongs()
+
+    if id in songs:
         return False
-    return True
 
-def addSongToDb(id: int):
-    cursor.execute("SELECT COUNT(*) FROM usedSongs")
-    row = cursor.fetchone()
+    if len(songs) >= 180:
+        songs = []
 
-    if row is not None:
-        count = int(cast(tuple, row)[0])
-    else: count = 0
-
-    if count >= 180:
-        cursor.execute("TRUNCATE TABLE usedSongs")
-
-    cursor.execute("INSERT INTO usedSongs (id) VALUES (%s)", (id,))
-
-    mydb.commit()
-    cursor.close()
-    mydb.close()
+    songs.append(id)
+    saveSongs(songs)
     return True
