@@ -38,6 +38,7 @@ jobs:
           YOUTUBE_COOKIES: ${{ secrets.YOUTUBE_COOKIES }}
         run: |
           mkdir -p "$RUNNER_TEMP"
+          printf '%s\n' "$YOUTUBE_COOKIES" > "$RUNNER_TEMP/cookies.txt"
           chmod 600 "$RUNNER_TEMP/cookies.txt"
 
       - name: Generate song
