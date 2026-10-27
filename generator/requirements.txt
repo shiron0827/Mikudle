@@ -1,0 +1,6 @@
+mysql-connector-python
+python-dotenv
+torch
+audio-separator
+requests
+yt-dlp
