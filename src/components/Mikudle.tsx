@@ -230,7 +230,7 @@ function Mikudle() {
                     </button>
                 </section>
                 <section className="music-play-box">
-                    {level >= 3 && song ? (
+                    {(level >= 3 || finished) && song ? (
                         <div className="thumb-container">
                             <img src={song["thumbUrl"]} className="thumbnail"></img>
                             <img src={song["thumbUrl"]} className="thumbnail-reflection"></img>
