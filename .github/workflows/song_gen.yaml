@@ -37,6 +37,7 @@ jobs:
         env:
           YOUTUBE_COOKIES: ${{ secrets.YOUTUBE_COOKIES }}
         run: |
+          mkdir -p "$RUNNER_TEMP"
           chmod 600 "$RUNNER_TEMP/cookies.txt"
 
       - name: Generate song
