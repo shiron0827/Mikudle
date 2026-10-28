@@ -48,3 +48,32 @@ jobs:
 
       - name: Generate song
         run: python generator/main.py
+        
+
+      - name: Inspect generated files
+        run: |
+          find public/songs -maxdepth 2 -type f
+          git status --short
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build website
+        run: npm run build
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4
