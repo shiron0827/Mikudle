@@ -3,6 +3,6 @@ python-dotenv
 torch
 audio-separator
 requests
-yt-dlp
+yt-dlp[default]
 onnxruntime
 audioread

@@ -33,6 +33,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r generator/requirements.txt
 
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
       - name: Set up YouTube cookies
         env:
           YOUTUBE_COOKIES: ${{ secrets.YOUTUBE_COOKIES }}
