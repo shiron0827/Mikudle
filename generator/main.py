@@ -8,8 +8,22 @@ import ytdlp
 import stemseparator
 import overlapDb
 import bridge
+import shutil
+from pathlib import Path
 
 def setup():
+    PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+    TODAY_DIR = PROJECT_ROOT / "public" / "songs" / "today"
+    TOMORROW_DIR = PROJECT_ROOT / "public" / "songs" / "tomorrow"
+
+    if TODAY_DIR.exists():
+        shutil.rmtree(TODAY_DIR)
+
+    if TOMORROW_DIR.exists():
+        TOMORROW_DIR.rename(TODAY_DIR)
+
+
     songDict = vocadb.chooseSong()
     if songDict is None:
         raise RuntimeError("Failed to get song")
