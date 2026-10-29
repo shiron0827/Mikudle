@@ -1,26 +1,23 @@
 import os
+from pathlib import Path
 import yt_dlp
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+OUTPUT_DIR = PROJECT_ROOT / "public" / "songs" / "tomorrow"
+
 def clearSongsFolder():
-    folder = "songs"
-
-    os.makedirs(folder, exist_ok=True)
-
-    for filename in os.listdir(folder):
-        path = os.path.join(folder, filename)
-
-        if os.path.isfile(path):
-            os.remove(path)
+    for path in OUTPUT_DIR.iterdir():
+        if path.is_file():
+            path.unlink()
 
 
 def downloadMp3(url: str) -> str:
-    clearSongsFolder()
-
     runner_temp = os.environ.get("RUNNER_TEMP")
 
     opts = {
         "format": "bestaudio/best",
-        "outtmpl": "../public/songs/tomorrow/fullsong.%(ext)s",
+        "outtmpl": str(OUTPUT_DIR / "fullsong.%(ext)s"),
+        "remote_components": ["ejs:npm"],
         "postprocessors": [{
             "key": "FFmpegExtractAudio",
             "preferredcodec": "mp3",
