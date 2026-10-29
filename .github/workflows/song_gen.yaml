@@ -3,7 +3,7 @@ name: Song Generator
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "50 23 * * *"
       timezone: "America/Los_Angeles"
   workflow_dispatch:
 
@@ -56,6 +56,17 @@ jobs:
         run: |
           find public/songs -maxdepth 2 -type f
           git status --short
+
+
+      - name: Save generated songs to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/
+          git add generator/usedSongs.json
+          git diff --cached --quiet || git commit -m "Update daily song"
+          git push
+
 
       - name: Set up Node
         uses: actions/setup-node@v5

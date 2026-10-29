@@ -43,7 +43,7 @@ function Mikudle() {
 
     async function LoadData() {
         const response = await fetch(
-            `${import.meta.env.BASE_URL}songs/tomorrow/songData.json`
+            `${import.meta.env.BASE_URL}songs/today/songData.json`
         );
 
         if (!response.ok) {
@@ -94,10 +94,10 @@ function Mikudle() {
         init.current = true;
         LoadData();
         async function LoadSong() {
-            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/tomorrow/fullsong_(Drums)_htdemucs_ft.wav`);
-            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/tomorrow/fullsong_(Bass)_htdemucs_ft.wav`);
-            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/tomorrow/fullsong_(Other)_htdemucs_ft.wav`);
-            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/tomorrow/fullsong_(Vocals)_htdemucs_ft.wav`);
+            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/today/fullsong_(Drums)_htdemucs_ft.wav`);
+            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/today/fullsong_(Bass)_htdemucs_ft.wav`);
+            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/today/fullsong_(Other)_htdemucs_ft.wav`);
+            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/today/fullsong_(Vocals)_htdemucs_ft.wav`);
             ToggleTrack(0, true);
 
             setLoaded(true);
