@@ -94,10 +94,10 @@ function Mikudle() {
         init.current = true;
         LoadData();
         async function LoadSong() {
-            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/today/fullsong_(Drums)_htdemucs_ft.wav`);
-            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/today/fullsong_(Bass)_htdemucs_ft.wav`);
-            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/today/fullsong_(Other)_htdemucs_ft.wav`);
-            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/today/fullsong_(Vocals)_htdemucs_ft.wav`);
+            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/today/fullsong_(Drums)_htdemucs_ft.mp3`);
+            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/today/fullsong_(Bass)_htdemucs_ft.mp3`);
+            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/today/fullsong_(Other)_htdemucs_ft.mp3`);
+            await engineRef.current.addTrack(`${import.meta.env.BASE_URL}songs/today/fullsong_(Vocals)_htdemucs_ft.mp3`);
             ToggleTrack(0, true);
 
             setLoaded(true);
