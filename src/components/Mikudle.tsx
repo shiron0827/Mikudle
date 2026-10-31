@@ -129,6 +129,18 @@ function Mikudle() {
         }
     }
 
+    function moveTime(time: number) {
+        const duration = engineRef.current.getDuration();
+        const newTime = Math.max(0, Math.min(engineRef.current.getCurrentTime() + time, duration));
+        engineRef.current.seek(newTime);
+        setProgress(duration > 0 ? newTime / duration : 0);
+    }
+
+    function changeVolume(volume: number) {
+        setVolume(volume);
+        engineRef.current.setVolume(volume / 100);
+    }
+
     useEffect(() => {
         if (!loaded) return;
 
@@ -272,11 +284,16 @@ function Mikudle() {
                                 min="0"
                                 max="100"
                                 value={volume}
-                                onChange={(e) => setVolume(Number(e.target.value))}
+                                onChange={(e) => changeVolume(Number(e.target.value))}
                             />
                         </div>
 
-                        <MdOutlineReplay10 className="skip-button-left"/>
+                        <MdOutlineReplay10 
+                            className="skip-button-left"
+                            onClick={
+                                () => moveTime(-10)
+                            }
+                        />
                         
                         <button
                             className="play-button"
@@ -285,7 +302,12 @@ function Mikudle() {
                             }
                         > {engineRef.current.playing ? <FaRegCirclePause className="pause-icon"/> : <CgPlayButtonO className="play-icon"/>} </button>
                         
-                        <MdOutlineForward10 className="skip-button-right"/>
+                        <MdOutlineForward10 
+                            className="skip-button-right"
+                            onClick={
+                                () => moveTime(10)
+                            }
+                        />
                     </div>
                 </section>
                 

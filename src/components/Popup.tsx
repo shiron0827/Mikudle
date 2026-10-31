@@ -57,14 +57,14 @@ function Popup({ guesses, won, title, link, buttonClick }: Props) {
         }
 
         let txt = "";
-        if(!won) txt = ":blue_square::blue_square::blue_square::blue_square::blue_square:"
+        if(!won) txt = ":white_large_square::white_large_square::white_large_square::white_large_square::white_large_square:"
         else {
             for(let i = 1; i < guesses; i++) {
-                txt += ":blue_square:"
+                txt += ":white_large_square:"
             }
             if(guesses < 6) txt += ":green_square:"
             for(let j = guesses + 1; j < 6; j++) {
-                txt += ":white_large_square:"
+                txt += ":black_large_square:"
             }
         }
         setShareTxt(txt);

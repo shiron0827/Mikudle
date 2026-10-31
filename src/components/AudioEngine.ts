@@ -20,6 +20,14 @@ export class AudioEngine {
     private startTime = 0;
     private pauseOffset = 0;
 
+    private masterGain: GainNode;
+
+    constructor() {
+        this.masterGain = this.context.createGain();
+        this.masterGain.gain.value = 0.5;
+        this.masterGain.connect(this.context.destination);
+    }
+
     async addTrack(url: string) {
         const response = await fetch(url);
         const arrayBuffer = await response.arrayBuffer();
@@ -27,7 +35,7 @@ export class AudioEngine {
         const buffer = await this.context.decodeAudioData(arrayBuffer);
 
         const gain = this.context.createGain();
-        gain.connect(this.context.destination);
+        gain.connect(this.masterGain);
         gain.gain.value = 0;
         
         const enabled = false;
@@ -169,6 +177,15 @@ export class AudioEngine {
         }
 
         return this.context.currentTime - this.startTime;
+    }
+
+    setVolume(volume: number) {
+        const normalizedVolume = Math.max(0, Math.min(volume, 1));
+        this.masterGain.gain.setTargetAtTime(
+            normalizedVolume,
+            this.context.currentTime,
+            0.01
+        );
     }
 }
 
