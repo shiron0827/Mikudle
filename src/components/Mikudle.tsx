@@ -63,7 +63,13 @@ function Mikudle() {
     }
 
     function Normalize(str: string): string {
-        return str.toLowerCase().replace(/[^\x00-\x7F]/g, "");
+        return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^\x00-\x7F]/g, "")
+        .replace(/[^\w]/g, "")
+        .toLowerCase()
+        .trim();
     }
 
     function CheckAnswer(guess: string) {
@@ -71,6 +77,10 @@ function Mikudle() {
         const correct = song.titles.some(
             title => Normalize(guess) === Normalize(title)
         );
+        song.titles.forEach((answer: string) => {
+            console.log(Normalize(guess))
+            console.log(Normalize(answer))
+        });
         if (correct) {
             setWon(true);
             Finish();
