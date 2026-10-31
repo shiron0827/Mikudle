@@ -62,10 +62,14 @@ function Mikudle() {
         }
     }
 
+    function Normalize(str: string): string {
+        return str.toLowerCase().replace(/[^\x00-\x7F]/g, "");
+    }
+
     function CheckAnswer(guess: string) {
         if(song == null) return;
         const correct = song.titles.some(
-            title => guess.toLowerCase() === title.toLowerCase()
+            title => Normalize(guess) === Normalize(title)
         );
         if (correct) {
             setWon(true);
